@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
         int ballon = Random.Range(0, spawnpoint.Length);
         Instantiate(EnemyPrefab, spawnpoint[ballon].position, Quaternion.identity);
         int ballonRed = Random.Range(0, spawnpoint.Length);
-        Instantiate(EnemyPrefab, spawnpoint[ballonRed].position, Quaternion.identity);
+        Instantiate(EnemyPrefabRed, spawnpoint[ballonRed].position, Quaternion.identity);
     }
 
     IEnumerator SpawnRoutine()
@@ -35,6 +35,12 @@ public class SpawnManager : MonoBehaviour
             {
                 int EnemyIndex = Random.Range(0, wave.numberOfRandomSpawn);
                 Instantiate(EnemyPrefab, spawnpoint[EnemyIndex].position, Quaternion.identity);
+                yield return new WaitForSeconds(wave.spawnInterval);
+            }
+            for (int i = 0; i < wave.totalSpawnEnemies; i++)
+            {
+                int EnemyIndexRed = Random.Range(0, wave.numberOfRandomSpawn);
+                Instantiate(EnemyPrefabRed, spawnpoint[EnemyIndexRed].position, Quaternion.identity);
                 yield return new WaitForSeconds(wave.spawnInterval);
             }
 
